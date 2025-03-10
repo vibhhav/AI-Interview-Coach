@@ -39,10 +39,87 @@ if st.button("Generate Lesson"):
         with st.spinner("Generating structured lesson..."):
             lesson = agents.generate_lesson(subject, topic)
             if lesson:
-                st.subheader("Lesson Plan:")
                 st.write(lesson)
             else:
                 st.error("Failed to generate a lesson.")
+
+st.subheader("📝 MCQ Practice")
+
+num_mcqs = st.number_input("Number of MCQs:", min_value=1, max_value=20, value=5, step=1)
+
+if st.button("Generate MCQs"):
+    if not subject.strip():
+        st.error("Please enter both a subject and a topic before generating MCQs.")
+    else:
+        with st.spinner("Generating multiple-choice questions..."):
+            mcq_text = agents.generate_mcqs(subject, topic, num_mcqs)
+
+            if mcq_text:
+                st.subheader("📌 MCQs:")
+                questions = []
+                current_question = {}
+                question_count = 0
+
+                for line in mcq_text.split("\n"):
+                    line = line.strip()
+                    if not line:
+                        continue
+        
+                    if line.startswith("Q"):
+                        # Save previous question if it exists
+                        if current_question:
+                            questions.append(current_question)
+                            
+                        # Start new question
+                        question_count += 1
+                        current_question = {
+                            "question": line,
+                            "options": [],
+                            "answer_index": None
+                        }
+                    elif line.startswith(("A)", "B)", "C)", "D)")):
+                        if current_question:
+                            current_question["options"].append(line)
+                    elif line.startswith("Correct Answer:") and current_question:
+                        current_question["correct"] = line
+
+            # Add the last question
+                if current_question:
+                    questions.append(current_question)
+
+                # Store in session state
+                st.session_state.mcq_questions = questions
+                st.session_state.mcq_answers = {i: "" for i in range(len(questions))}
+
+if "mcq_questions" in st.session_state and st.session_state.mcq_questions:
+    
+    for i, q in enumerate(st.session_state.mcq_questions):
+        st.markdown(f"### {q['question']}")
+        
+        for option in q["options"]:
+            st.markdown(option)
+        
+        st.session_state.mcq_answers[i] = st.radio(
+            "Your answer:",
+            ["A", "B", "C", "D"],
+            key=f"mcq_ans_{i}"
+        )
+        
+        st.markdown("---")
+
+
+if st.button("Submit MCQ Answers"):
+    if not st.session_state.mcq_questions:
+        st.error("❌ Please generate MCQs first!")
+    else:
+        with st.spinner("⏳ Evaluating your answers..."):
+            user_mcq_responses = {i: st.session_state.mcq_answers[i] for i in range(len(st.session_state.mcq_questions))}
+            feedback_mcq = agents.evaluate_mcq_answers(user_mcq_responses)
+
+            if feedback_mcq:
+                st.subheader("MCQ Feedback")
+                st.markdown(feedback_mcq, unsafe_allow_html=True)
+
 
 st.subheader("📝 Interview Practice")
 
