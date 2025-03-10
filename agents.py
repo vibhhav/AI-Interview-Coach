@@ -20,7 +20,7 @@ class TutorAgents:
         # Interview Question Generator
         self.interview_agent = AssistantAgent(
             name="interview_agent",
-            system_message="Generate 5 interview-style questions for the given topic. Ensure a mix of technical and conceptual questions. DO NOT include answers, just the questions.",
+            system_message="Generate interview-style questions for the given topic. Ensure a mix of technical and conceptual questions. DO NOT include answers, just the questions.",
             llm_config=self.llm_config,
             human_input_mode="NEVER",
             code_execution_config=False
@@ -38,7 +38,7 @@ class TutorAgents:
     def generate_lesson(self, subject, topic):
         """Generates a structured lesson plan."""
         response = self.lesson_agent.generate_reply(
-            messages=[{"role": "user", "content": f"Create a lesson plan on {topic} for {subject}."}]
+            messages=[{"role": "user", "content": f"Create a detailed lesson plan on {topic} for {subject}."}]
         )
         return response.get("content", "Lesson generation failed!") if isinstance(response, dict) else str(response)
 
