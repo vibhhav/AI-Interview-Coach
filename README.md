@@ -1,7 +1,7 @@
 # 🎓 Interview Preparation Coach
 
 ## 📝 Overview
-The **Interview Preparation Coach** is a multi-agent AI-powered platform built using Streamlit and Groq's LLaMA-based models. It provides structured learning, interview questions, MCQs, and feedback to help users enhance their knowledge and practice for technical interviews.
+The **Interview Preparation Coach** is a multi-agent AI-powered platform built using AutoGen and Groq's LLaMA-based models. It provides structured learning, interview questions, MCQs, and feedback to help users enhance their knowledge and practice for technical interviews.
 
 ## 🚀 Features
 - **Lesson Generator:** Creates structured learning modules on any given topic.
@@ -16,13 +16,13 @@ The **Interview Preparation Coach** is a multi-agent AI-powered platform built u
 Ensure you have Python installed on your system. You will also need the following dependencies:
 
 ```bash
-pip install streamlit python-dotenv autogen
+pip install -r requirements.txt
 ```
 
 ### 2️⃣ Clone the Repository
 ```bash
-git clone <your-repo-url>
-cd <your-project-folder>
+git clone https://github.com/vibhhav/AI-Interview-Coach.git
+cd AI-Interview-Coach
 ```
 
 ### 3️⃣ Set Up Environment Variables
@@ -38,15 +38,21 @@ streamlit run app.py
 ```
 
 ## 🎯 How It Works
-1. Enter the subject and topic you want to practice.
-2. Generate structured lessons for in-depth understanding.
-3. Generate MCQs and answer them to test your knowledge.
-4. Submit MCQ answers and receive detailed evaluations.
-5. Generate interview questions based on difficulty level.
-6. Write answers and receive AI-driven feedback.
+-  Enter the subject and topic you want to practice.
+- Generate structured lessons for in-depth understanding.
+- Generate MCQs and answer them to test your knowledge.
+- Submit MCQ answers and receive detailed evaluations.
+- Generate interview questions based on difficulty level.
+- Write answers and receive AI-driven feedback.
 
 ## 📸 Screenshots
-(Include relevant screenshots of the application UI here)
+![Image](https://github.com/user-attachments/assets/c7d91725-ed60-45e2-8add-ff66defdef4d)
+
+![Image](https://github.com/user-attachments/assets/981c7393-99a9-4303-be54-6e1a7566665c)
+
+![Image](https://github.com/user-attachments/assets/375a3968-4262-4a9b-b741-35a46063ffd7)
+
+![Image](https://github.com/user-attachments/assets/f868566f-d0b4-4cc0-81a5-315337f9e0ae)
 
 ## 📌 Technologies Used
 - **Python** (Backend logic)
@@ -55,15 +61,9 @@ streamlit run app.py
 - **Groq API** (LLaMA-3.3-70B Model)
 
 ## 🏗️ Future Enhancements
-- Add support for video-based explanations.
-- Improve answer evaluation using advanced NLP techniques.
-- Implement personalized learning paths based on user performance.
+-  Voice-based mock interviews using Whisper API
+ - Resume-based question generation
+ - Web Dashboard with user progress tracking
 
-## 🤝 Contributing
-Contributions are welcome! If you have suggestions or improvements, feel free to submit a pull request.
 
-## 📜 License
-MIT License
 
----
-⚡ Happy Learning & Best of Luck for Your Interviews! 🚀
