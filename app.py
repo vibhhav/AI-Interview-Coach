@@ -365,5 +365,4 @@ if st.button("Submit Answers"):
             st.subheader("📊 Interview Feedback")
             for result in feedback_results:
                 st.markdown(result, unsafe_allow_html=True)
-            st.success(
-                        "🎯 Keep practicing, and you'll see great improvement! 🚀")
+
